@@ -27,7 +27,7 @@ class _OnboardingState extends State<Onboarding> {
             SizedBox(height: 20),
             Text(
               "Craving something delicious?\nOrder noe and get your favorites\ndelivered fast!",
-              style: AppWidget.simpleTextFieldStyle(),
+              style: AppWidget.simpleTextFieldStyle(15),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),

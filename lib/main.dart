@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/pages/home.dart';
-import 'package:marketplace/pages/onboarding.dart';
+// import 'package:marketplace/pages/onboarding.dart';
 
 void main() {
   runApp(const MyApp());

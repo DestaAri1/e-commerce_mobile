@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/component/category_tile.dart';
+import 'package:marketplace/model/category_data.dart';
+import 'package:marketplace/model/category_model.dart';
 import 'package:marketplace/services/widget_support.dart';
 
 class Home extends StatefulWidget {
@@ -9,6 +12,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<CategoryModel> categories = [];
+  String track = "0";
+
+  @override
+  void initState() {
+    categories = getCategories();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +32,29 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[_homeLogo(), _userPicture()],
             ),
-            SizedBox(height: 30),
-            Container(
-              margin: EdgeInsets.only(right: 20),
-              decoration: BoxDecoration(color: Color(0xFFececf8)),
-              child: TextField(),
+            SizedBox(height: 10),
+            _searchBar(),
+            SizedBox(height: 10),
+            SizedBox(
+              height: 40,
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return CategoryTile(
+                    name: categories[index].name!,
+                    image: categories[index].image!,
+                    categoryIndex: index.toString(),
+                    selectedIndex: track,
+                    onTap: () {
+                      setState(() {
+                        track = index.toString();
+                      });
+                    },
+                  );
+                },
+                shrinkWrap: true,
+                itemCount: categories.length,
+                scrollDirection: Axis.horizontal,
+              ),
             ),
           ],
         ),
@@ -44,7 +74,7 @@ class _HomeState extends State<Home> {
         ),
         Text(
           "Order your favourite food!",
-          style: AppWidget.simpleTextFieldStyle(),
+          style: AppWidget.simpleTextFieldStyle(20),
         ),
       ],
     );
@@ -62,6 +92,39 @@ class _HomeState extends State<Home> {
           fit: BoxFit.cover,
         ),
       ),
+    );
+  }
+
+  Widget _searchBar() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.only(left: 10),
+            margin: EdgeInsets.only(right: 10),
+            decoration: BoxDecoration(
+              color: Color(0xFFececf8),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: "Search...",
+              ),
+            ),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.all(9),
+          margin: EdgeInsets.only(right: 20),
+          decoration: BoxDecoration(
+            color: Color(0xFFef2b39),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(Icons.search, color: Colors.white, size: 30),
+        ),
+      ],
     );
   }
 }
