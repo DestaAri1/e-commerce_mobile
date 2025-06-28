@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketplace/pages/home.dart';
+import 'package:marketplace/pages/buttonNav.dart';
 // import 'package:marketplace/pages/onboarding.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Home(),
+      home: ButtonNav()
     );
   }
 }

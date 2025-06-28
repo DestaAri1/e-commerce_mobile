@@ -63,7 +63,6 @@ class _HomeState extends State<Home> {
                       ? burger.length
                       : null,
                   itemBuilder: (context, index) {
-                    print(track);
                     return track == "0"
                         ? FoodTile(
                             name: pizza[index].name!,
